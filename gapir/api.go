@@ -51,9 +51,9 @@ type (
 // from a connected GAPIR device.
 type ReplayResponseHandler interface {
 	// HandlePayloadRequest handles the given payload request message.
-	HandlePayloadRequest(context.Context, string) error
+	HandlePayloadRequest(context.Context, string)
 	// HandleResourceRequest handles the given resource request message.
-	HandleResourceRequest(context.Context, *ResourceRequest) error
+	HandleResourceRequest(context.Context, *ResourceRequest) 
 	// HandleCrashDump handles the given crash dump message.
 	HandleCrashDump(context.Context, *CrashDump) error
 	// HandlePostData handles the given post data message.
@@ -63,7 +63,7 @@ type ReplayResponseHandler interface {
 	// HandleFinished handles the replay complete
 	HandleFinished(context.Context, error) error
 	// HandleFenceReadyRequest handles the profiler ready message.
-	HandleFenceReadyRequest(context.Context, *FenceReadyRequest) error
+	HandleFenceReadyRequest(context.Context, *FenceReadyRequest)
 }
 
 // Connection represents a connection between GAPIS and GAPIR. It wraps the
@@ -78,18 +78,18 @@ type Connection interface {
 	Close()
 	// Ping sends a ping to the connected GAPIR device and expect a response to make
 	// sure the connection is alive.
-	Ping(ctx context.Context) error
+	Ping(ctx context.Context)
 	// Shutdown sends a signal to the connected GAPIR device to shutdown the
 	// connection server.
 	Shutdown(ctx context.Context) error
 	// SendResources sends the given resources data to the connected GAPIR device.
-	SendResources(ctx context.Context, resources []byte) error
+	SendResources(ctx context.Context, resources []byte)
 	// SendPayload sends the given payload to the connected GAPIR device.
 	SendPayload(ctx context.Context, payload Payload) error
 	// SendFenceReady signals the device to continue a replay.
 	SendFenceReady(ctx context.Context, id uint32) error
 	// PrewarmReplay requests the GAPIR device to get itself into the given state
-	PrewarmReplay(ctx context.Context, payload string, cleanup string) error
+	PrewarmReplay(ctx context.Context, payload string, cleanup string)
 	// HandleReplayCommunication handles the communication with the GAPIR device on
 	// a replay stream connection. It sends a replay request with the given
 	// replayID to the connected GAPIR device, expects the device to request payload
